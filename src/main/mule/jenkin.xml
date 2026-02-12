@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="520b61d2-70dc-4e37-9ae9-4a5452a861a3" >
+		<http:listener-connection host="0.0.0.0" port="8085" />
+	</http:listener-config>
+	<flow name="jenkinFlow" doc:id="303f54e5-476a-4b57-936f-a31f81a63abb" >
+		<http:listener doc:name="Listener" doc:id="b1475463-26cb-4b85-bc56-506d51eab069" config-ref="HTTP_Listener_config" path="/jenkin"/>
+		<logger level="INFO" doc:name="Logger" doc:id="ee82b44c-42b0-478e-981b-0ba72c01f25c" />
+		<set-payload value='#["jenkins successfully completed"]' doc:name="Set Payload" doc:id="70a9db9b-af6c-4dd3-9265-d2c1c084d14e" />
+		<logger level="INFO" doc:name="Logger" doc:id="2208fcd3-0038-40ec-8279-8f0d1a30616a" message="#[payload]"/>
+	</flow>
+</mule>
